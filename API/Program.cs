@@ -23,7 +23,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(
 );
 
 // Register IBaseRepository
-builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+// builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

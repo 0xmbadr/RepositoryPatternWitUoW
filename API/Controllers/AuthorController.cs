@@ -8,17 +8,17 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class AuthorController : ControllerBase
     {
-        private readonly IBaseRepository<Author> _AuthorRepo;
+        private readonly IUnitOfWork _uow;
 
-        public AuthorController(IBaseRepository<Author> authorRepo)
+        public AuthorController(IUnitOfWork uow)
         {
-            _AuthorRepo = authorRepo;
+            _uow = uow;
         }
 
         [HttpGet]
         public IActionResult GetById()
         {
-            return Ok(_AuthorRepo.GetById(1));
+            return Ok(_uow.Authors.GetById(1));
         }
     }
 }

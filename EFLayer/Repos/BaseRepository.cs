@@ -18,16 +18,44 @@ namespace EFLayer.Repos
         public T Add(T entity)
         {
             _context.Set<T>().Add(entity);
-            _context.SaveChanges();
             return entity;
         }
 
         public IEnumerable<T> AddRange(IEnumerable<T> entities)
         {
             _context.Set<T>().AddRange(entities);
-            _context.SaveChanges();
 
             return entities;
+        }
+
+        public void Attach(T entity)
+        {
+            _context.Set<T>().Attach(entity);
+        }
+
+        public void AttachRange(IEnumerable<T> entities)
+        {
+            _context.Set<T>().AttachRange(entities);
+        }
+
+        public int Count()
+        {
+            return _context.Set<T>().Count();
+        }
+
+        public int Count(Expression<Func<T, bool>> criteria)
+        {
+            return _context.Set<T>().Count(criteria);
+        }
+
+        public void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
+
+        public void DeleteRange(IEnumerable<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
         }
 
         public T Find(Expression<Func<T, bool>> criteria, string[] includes = null)
@@ -107,6 +135,12 @@ namespace EFLayer.Repos
         public async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
+        }
+
+        public T Update(T entity)
+        {
+            _context.Update(entity);
+            return entity;
         }
     }
 }
